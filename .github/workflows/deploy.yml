@@ -3,7 +3,7 @@ name: Deploy to HyperHost
 on:
   push:
     branches:
-      - main  # Скрипт спрацьовуватиме щоразу, коли ви робите push у гілку main
+      - main
 
 jobs:
   deploy:
@@ -16,9 +16,9 @@ jobs:
       uses: easingthemes/ssh-deploy@main
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
-        ARGS: "-rlgoDzvO --delete" # --delete видалятиме на хостингу ті файли, які ви видалили в Git
+        ARGS: "-rlgoDzvO --delete"
         SOURCE: "./"
         REMOTE_HOST: ${{ secrets.SSH_HOST }}
         REMOTE_USER: ${{ secrets.SSH_USERNAME }}
         REMOTE_PORT: "22"
-        TARGET: "/home/${{ secrets.SSH_USERNAME }}/public_html/" # Головна папка сайту на HyperHost
+        TARGET: "/home/h75294c/ukrbook.pp.ua/" # Тепер вказано точний шлях до вашого движка
