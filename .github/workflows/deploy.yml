@@ -16,9 +16,9 @@ jobs:
       uses: easingthemes/ssh-deploy@main
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
-        ARGS: "-rlgoDzvO --delete"
+        ARGS: "-rlgoDzvO"
         SOURCE: "./"
         REMOTE_HOST: ${{ secrets.SSH_HOST }}
         REMOTE_USER: ${{ secrets.SSH_USERNAME }}
         REMOTE_PORT: "22"
-        TARGET: "/home/h75294c/ukrbook.pp.ua/" # Тепер вказано точний шлях до вашого движка
+        TARGET: "/home/h75294c/ukrbook.pp.ua/"
