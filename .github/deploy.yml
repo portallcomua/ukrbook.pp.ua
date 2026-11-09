@@ -1,0 +1,24 @@
+name: Deploy to HyperHost
+
+on:
+  push:
+    branches:
+      - main  # Скрипт спрацьовуватиме щоразу, коли ви робите push у гілку main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Deploy via rsync
+      uses: easingthemes/ssh-deploy@main
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+        ARGS: "-rlgoDzvO --delete" # --delete видалятиме на хостингу ті файли, які ви видалили в Git
+        SOURCE: "./"
+        REMOTE_HOST: ${{ secrets.SSH_HOST }}
+        REMOTE_USER: ${{ secrets.SSH_USERNAME }}
+        REMOTE_PORT: "22"
+        TARGET: "/home/${{ secrets.SSH_USERNAME }}/public_html/" # Головна папка сайту на HyperHost
